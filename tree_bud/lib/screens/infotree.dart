@@ -1,4 +1,4 @@
-import "package:ar_function/screens/arfunction.dart";
+import "package:tree_bud/screens/arfunction.dart";
 import "package:flutter/material.dart";
 
 class InfoTree extends StatelessWidget {

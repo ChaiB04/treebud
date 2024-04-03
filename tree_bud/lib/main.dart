@@ -1,5 +1,5 @@
-import 'package:ar_function/screens/loadpage.dart';
-import 'package:ar_function/screens/arfunction.dart';
+import 'package:tree_bud/screens/loadpage.dart';
+import 'package:tree_bud/screens/arfunction.dart';
 import 'package:flutter/material.dart';
 
 void main() {
