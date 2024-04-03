@@ -4,10 +4,6 @@ import "package:tree_bud/views/arfunction.dart";
 class LoadPage extends StatelessWidget {
   const LoadPage({super.key});
 
-  @override
-  void initState() {
-    initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +15,25 @@ class LoadPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: (){
-              Navigator.push(context, 
-              MaterialPageRoute(builder: (context) => const ARfunction()),
-              );
-            }, 
-            child: const Text("View tree")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ARfunction()),
+                  );
+                },
+                child: const Text("View tree")),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => const MyHomePage()),
+            //       );
+            //     },
+            //     child: const Text("View Map")),
           ],
         ),
-        ),
-      );
-}
+      ),
+    );
+  }
 }
