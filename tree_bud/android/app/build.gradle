@@ -1,3 +1,4 @@
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -64,7 +65,8 @@ flutter {
     source '../..'
 }
 
-dependencies {
+
+ dependencies {
     // Provides ARCore Session and related resources.
     implementation 'com.google.ar:core:1.42.0'
 
@@ -73,4 +75,7 @@ dependencies {
 
     // Alternatively, use ArSceneView without the UX dependency.
     implementation 'com.google.ar.sceneform:core:1.17.1'
+   
+
+
 }
