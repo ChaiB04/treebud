@@ -1,6 +1,6 @@
+import 'package:ar_function/screens/loadpage.dart';
+import 'package:ar_function/screens/arfunction.dart';
 import 'package:flutter/material.dart';
-import 'package:tree_bud/views/arfunction.dart';
-import 'package:tree_bud/views/loadpage.dart';
 
 void main() {
   runApp(const MyApp());

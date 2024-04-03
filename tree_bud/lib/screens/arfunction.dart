@@ -1,6 +1,6 @@
+import 'package:ar_function/screens/infotree.dart';
 import 'package:flutter/material.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
-import 'package:tree_bud/views/infotree.dart';
 import 'package:vector_math/vector_math_64.dart' as vector64;
 
 class ARfunction extends StatefulWidget {
@@ -17,6 +17,16 @@ class _ARfunctionState extends State<ARfunction> {
   void initState() {
     super.initState();
   }
+
+  // @override
+  // void dispose() {
+  //   try {
+  //     coreController?.dispose();
+  //   } catch (e) {
+  //     print('Error disposing ArCoreController: $e');
+  //   }
+  //   super.dispose();
+  // }
 
   void augmentedRealityViewCreated(ArCoreController controller) {
     coreController = controller;

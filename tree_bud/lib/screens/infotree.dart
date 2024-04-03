@@ -1,19 +1,14 @@
+import "package:ar_function/screens/arfunction.dart";
 import "package:flutter/material.dart";
-import "package:tree_bud/views/arfunction.dart";
 
-class LoadPage extends StatelessWidget {
-  const LoadPage({super.key});
-
-  @override
-  void initState() {
-    initState();
-  }
+class InfoTree extends StatelessWidget {
+  const InfoTree({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Loading page"),
+        title: const Text("Petunia"),
       ),
       body: Center(
         child: Column(
@@ -21,7 +16,7 @@ class LoadPage extends StatelessWidget {
           children: [
             ElevatedButton(onPressed: (){
               Navigator.push(context, 
-              MaterialPageRoute(builder: (context) => const ARfunction()),
+              MaterialPageRoute(builder: (context) =>const ARfunction()),
               );
             }, 
             child: const Text("View tree")),
