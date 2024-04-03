@@ -1,6 +1,8 @@
 import "package:tree_bud/screens/arfunction.dart";
 import "package:flutter/material.dart";
 
+import "maps.dart";
+
 class LoadPage extends StatelessWidget {
   const LoadPage({super.key});
 
@@ -25,6 +27,15 @@ class LoadPage extends StatelessWidget {
               );
             }, 
             child: const Text("View tree")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                  );
+                },
+                child: const Text("View Map")),
+
           ],
         ),
         ),
