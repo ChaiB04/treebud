@@ -31,7 +31,7 @@ class LoadPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                    MaterialPageRoute(builder: (context) => const MapFunction()),
                   );
                 },
                 child: const Text("View Map")),

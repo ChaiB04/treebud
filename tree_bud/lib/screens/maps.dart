@@ -1,19 +1,57 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:latlong2/latlong.dart' as latlong;
 import 'package:latlong2/latlong.dart';
+import 'package:tree_bud/screens/widgets/SeparatedColumn.dart';
+import 'package:tree_bud/screens/widgets/TreeMarker.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+import '../models/tree.dart';
+import '../models/user.dart';
+
+class MapFunction extends StatefulWidget {
+  const MapFunction({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MapFunction> createState() => _MapFunctionState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin {
+
+
+
+  // Dummy trees
+  List<Tree> trees = [];
+
+  void addToTreeList() {
+    // Creating new user and task history for the new tree
+    User user3 = User('user3', 'Alice Johnson', 'pass');
+    User user4 = User('user4', 'Bob Brown', 'pass');
+
+    Map<User, String> newTaskHistory = {
+      user3: 'Task started',
+      user4: 'Task in progress',
+    };
+
+    // Creating a new tree and adding it to the list
+    trees.add(Tree('3', 'Maple Tree', LatLng(52.5200, 13.4050), user3, newTaskHistory));
+    trees.add(Tree('4', 'Apple Tree', LatLng(52.2341, 13.2454), user4, newTaskHistory));
+  }
+
+
+  void _addMarkersForTrees() {
+    for (var tree in trees) {
+      _addMarker(tree.location);
+    }
+  }
+
+  @override
+  void initState(){
+    addToTreeList();
+    _addMarkersForTrees();
+    super.initState();
+  }
   static const _useTransformerId = 'useTransformerId';
 
   final markers = ValueNotifier<List<AnimatedMarker>>([]);
@@ -41,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             mapController: _animatedMapController.mapController,
             options: MapOptions(
               initialCenter: center,
-              onTap: (_, point) => _addMarker(point as LatLng),
+              // onPositionChanged: (_, point) => _updateMarker(),
             ),
             children: [
               TileLayer(
@@ -129,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                   final points = markers.value.map((m) => m.point);
                   setState(
-                        () => _lastMovedToMarkerIndex =
+                    () => _lastMovedToMarkerIndex =
                         (_lastMovedToMarkerIndex + 1) % points.length,
                   );
 
@@ -149,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
                   final points = markers.value.map((m) => m.point);
                   setState(
-                        () => _lastMovedToMarkerIndex =
+                    () => _lastMovedToMarkerIndex =
                         (_lastMovedToMarkerIndex + 1) % points.length,
                   );
 
@@ -188,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void _addMarker(LatLng point) {
     markers.value = List.from(markers.value)
       ..add(
-        MyMarker(
+        TreeMarker(
           point: point as latlong.LatLng,
           onTap: () => _animatedMapController.animateTo(
             dest: point as latlong.LatLng,
@@ -199,64 +237,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 }
 
-class MyMarker extends AnimatedMarker {
-  MyMarker({
-    required super.point,
-    VoidCallback? onTap,
-  }) : super(
-    width: markerSize,
-    height: markerSize,
-    builder: (context, animation) {
-      final size = markerSize * animation.value;
 
-      return GestureDetector(
-        onTap: onTap,
-        child: Opacity(
-          opacity: animation.value,
-          child: Icon(
-            Icons.room,
-            size: size,
-          ),
-        ),
-      );
-    },
-  );
 
-  static const markerSize = 50.0;
-}
 
-class SeparatedColumn extends StatelessWidget {
-  const SeparatedColumn({
-    super.key,
-    required this.separator,
-    this.children = const [],
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.start,
-  });
-
-  final Widget separator;
-  final List<Widget> children;
-  final MainAxisSize mainAxisSize;
-  final CrossAxisAlignment crossAxisAlignment;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: mainAxisSize,
-      crossAxisAlignment: crossAxisAlignment,
-      children: [
-        ..._buildChildren(),
-      ],
-    );
-  }
-
-  Iterable<Widget> _buildChildren() sync* {
-    for (var i = 0; i < children.length; i++) {
-      yield children[i];
-      if (i < children.length - 1) yield separator;
-    }
-  }
-}
 
 /// Inspired by the contribution of [rorystephenson](https://github.com/fleaflet/flutter_map/pull/1475/files#diff-b663bf9f32e20dbe004bd1b58a53408aa4d0c28bcc29940156beb3f34e364556)
 final _animatedMoveTileUpdateTransformer = TileUpdateTransformer.fromHandlers(
@@ -264,7 +247,7 @@ final _animatedMoveTileUpdateTransformer = TileUpdateTransformer.fromHandlers(
     final id = AnimationId.fromMapEvent(updateEvent.mapEvent);
 
     if (id == null) return sink.add(updateEvent);
-    if (id.customId != _MyHomePageState._useTransformerId) {
+    if (id.customId != _MapFunctionState._useTransformerId) {
       if (id.moveId == AnimatedMoveId.started) {
         debugPrint('TileUpdateTransformer disabled, using default behaviour.');
       }
@@ -282,7 +265,7 @@ final _animatedMoveTileUpdateTransformer = TileUpdateTransformer.fromHandlers(
         );
         break;
       case AnimatedMoveId.inProgress:
-      // Do not prune or load during movement.
+        // Do not prune or load during movement.
         break;
       case AnimatedMoveId.finished:
         debugPrint('Pruning tiles after animated movement.');
