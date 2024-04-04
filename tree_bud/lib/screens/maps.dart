@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latlong;
 import 'package:latlong2/latlong.dart';
+import 'package:tree_bud/screens/loadpage.dart';
 import 'package:tree_bud/screens/widgets/SeparatedColumn.dart';
 import 'package:tree_bud/screens/widgets/TreeMarker.dart';
 
 import '../models/tree.dart';
 import '../models/user.dart';
+import 'arfunction.dart';
 
 class MapFunction extends StatefulWidget {
   const MapFunction({super.key});
@@ -19,8 +22,6 @@ class MapFunction extends StatefulWidget {
 
 class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin {
 
-
-
   // Dummy trees
   List<Tree> trees = [];
 
@@ -29,14 +30,16 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
     User user3 = User('user3', 'Alice Johnson', 'pass');
     User user4 = User('user4', 'Bob Brown', 'pass');
 
+    List<User> caretakers = [user4, user3];
+
     Map<User, String> newTaskHistory = {
       user3: 'Task started',
       user4: 'Task in progress',
     };
 
     // Creating a new tree and adding it to the list
-    trees.add(Tree('3', 'Maple Tree', LatLng(52.5200, 13.4050), user3, newTaskHistory));
-    trees.add(Tree('4', 'Apple Tree', LatLng(52.2341, 13.2454), user4, newTaskHistory));
+    trees.add(Tree('3', 'Maple Tree', LatLng(52.5200, 13.4050), user3, newTaskHistory, caretakers));
+    trees.add(Tree('4', 'Apple Tree', LatLng(52.2341, 13.2454), user4, newTaskHistory,caretakers));
   }
 
 
@@ -46,16 +49,26 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
     }
   }
 
+  // late latlong.LatLng center;
+
+  static const _useTransformerId = 'useTransformerId';
+
+  final markers = ValueNotifier<List<AnimatedMarker>>([]);
+  latlong.LatLng center = const latlong.LatLng(51.509364, -0.128928);
+
   @override
-  void initState(){
+  void initState()  {
+    markCenter();
     addToTreeList();
     _addMarkersForTrees();
     super.initState();
   }
-  static const _useTransformerId = 'useTransformerId';
 
-  final markers = ValueNotifier<List<AnimatedMarker>>([]);
-  final center = const latlong.LatLng(51.509364, -0.128928);
+  void markCenter() async {
+    print("went into this");
+    center = await _determinePosition();
+
+  }
 
   bool _useTransformer = true;
   int _lastMovedToMarkerIndex = -1;
@@ -75,7 +88,9 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
       body: ValueListenableBuilder<List<AnimatedMarker>>(
         valueListenable: markers,
         builder: (context, markers, _) {
+          // markCenter();
           return FlutterMap(
+
             mapController: _animatedMapController.mapController,
             options: MapOptions(
               initialCenter: center,
@@ -98,33 +113,53 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
         crossAxisAlignment: CrossAxisAlignment.end,
         separator: const SizedBox(height: 8),
         children: [
+          // FloatingActionButton(
+          //   onPressed: () => _animatedMapController.animatedRotateFrom(
+          //     90,
+          //     customId: _useTransformer ? _useTransformerId : null,
+          //   ),
+          //   tooltip: 'Rotate 90°',
+          //   child: const Icon(Icons.rotate_right),
+          // ),
+          // FloatingActionButton(
+          //   onPressed: () => _animatedMapController.animatedRotateFrom(
+          //     -90,
+          //     customId: _useTransformer ? _useTransformerId : null,
+          //   ),
+          //   tooltip: 'Rotate -90°',
+          //   child: const Icon(Icons.rotate_left),
+          // ),
           FloatingActionButton(
-            onPressed: () => _animatedMapController.animatedRotateFrom(
-              90,
-              customId: _useTransformer ? _useTransformerId : null,
-            ),
-            tooltip: 'Rotate 90°',
-            child: const Icon(Icons.rotate_right),
-          ),
-          FloatingActionButton(
-            onPressed: () => _animatedMapController.animatedRotateFrom(
-              -90,
-              customId: _useTransformer ? _useTransformerId : null,
-            ),
-            tooltip: 'Rotate -90°',
-            child: const Icon(Icons.rotate_left),
+            tooltip: 'Move to next marker',
+            onPressed: () {
+              if (markers.value.isEmpty) return;
+
+              final points = markers.value.map((m) => m.point);
+              setState(
+                    () => _lastMovedToMarkerIndex =
+                    (_lastMovedToMarkerIndex + 1) % points.length,
+              );
+
+              _animatedMapController.animateTo(
+                dest: points.elementAt(_lastMovedToMarkerIndex),
+                customId: _useTransformer ? _useTransformerId : null,
+              );
+            },
+            child: const Icon(Icons.not_listed_location),
           ),
           FloatingActionButton(
             onPressed: () {
-              markers.value = [];
+              // markers.value = [];
+              markCenter();
               _animatedMapController.animateTo(
                 dest: center,
                 rotation: 0,
                 customId: _useTransformer ? _useTransformerId : null,
               );
             },
-            tooltip: 'Clear modifications',
-            child: const Icon(Icons.clear_all),
+            tooltip: 'Go to your location',
+            child: const Icon(Icons.person_search,
+              color: Colors.red, ),
           ),
           FloatingActionButton(
             onPressed: () => _animatedMapController.animatedZoomIn(
@@ -140,83 +175,73 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
             tooltip: 'Zoom out',
             child: const Icon(Icons.zoom_out),
           ),
-          FloatingActionButton(
-            tooltip: 'Center on markers',
-            onPressed: () {
-              if (markers.value.length < 2) return;
-
-              final points = markers.value.map((m) => m.point).toList();
-              _animatedMapController.animatedFitCamera(
-                cameraFit: CameraFit.coordinates(
-                  coordinates: points,
-                  padding: const EdgeInsets.all(12),
-                ),
-                rotation: 0,
-                customId: _useTransformer ? _useTransformerId : null,
-              );
-            },
-            child: const Icon(Icons.center_focus_strong),
-          ),
+          // FloatingActionButton(
+          //   tooltip: 'Center on markers',
+          //   onPressed: () {
+          //     if (markers.value.length < 2) return;
+          //
+          //     final points = markers.value.map((m) => m.point).toList();
+          //     _animatedMapController.animatedFitCamera(
+          //       cameraFit: CameraFit.coordinates(
+          //         coordinates: points,
+          //         padding: const EdgeInsets.all(12),
+          //       ),
+          //       rotation: 0,
+          //       customId: _useTransformer ? _useTransformerId : null,
+          //     );
+          //   },
+          //   child: const Icon(Icons.center_focus_strong),
+          // ),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FloatingActionButton(
-                tooltip: 'Move to next marker with offset',
-                onPressed: () {
-                  if (markers.value.isEmpty) return;
-
-                  final points = markers.value.map((m) => m.point);
-                  setState(
-                    () => _lastMovedToMarkerIndex =
-                        (_lastMovedToMarkerIndex + 1) % points.length,
-                  );
-
-                  _animatedMapController.animateTo(
-                    dest: points.elementAt(_lastMovedToMarkerIndex),
-                    customId: _useTransformer ? _useTransformerId : null,
-                    offset: const Offset(100, 100),
-                  );
-                },
-                child: const Icon(Icons.multiple_stop),
-              ),
-              const SizedBox.square(dimension: 8),
-              FloatingActionButton(
-                tooltip: 'Move to next marker',
-                onPressed: () {
-                  if (markers.value.isEmpty) return;
-
-                  final points = markers.value.map((m) => m.point);
-                  setState(
-                    () => _lastMovedToMarkerIndex =
-                        (_lastMovedToMarkerIndex + 1) % points.length,
-                  );
-
-                  _animatedMapController.animateTo(
-                    dest: points.elementAt(_lastMovedToMarkerIndex),
-                    customId: _useTransformer ? _useTransformerId : null,
-                  );
-                },
-                child: const Icon(Icons.polyline_rounded),
-              ),
-            ],
-          ),
-          FloatingActionButton.extended(
-            label: Row(
-              children: [
-                const Text('Transformer'),
-                Switch(
-                  activeColor: Colors.blue.shade200,
-                  activeTrackColor: Colors.black38,
-                  value: _useTransformer,
-                  onChanged: (newValue) {
-                    setState(() => _useTransformer = newValue);
+              SizedBox(
+                width: 200, // Set your desired width here
+                child: FloatingActionButton(
+                  tooltip: 'Go to plant your own tree',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoadPage()),
+                    );
                   },
+                  child: const Text("Plant your tree!"),
                 ),
-              ],
-            ),
-            onPressed: () {
-              setState(() => _useTransformer = !_useTransformer);
-            },
+              ),
+              // FloatingActionButton(
+              //   tooltip: 'Move to next marker with offset',
+              //   onPressed: () {
+              //     if (markers.value.isEmpty) return;
+              //
+              //     final points = markers.value.map((m) => m.point);
+              //     setState(
+              //       () => _lastMovedToMarkerIndex =
+              //           (_lastMovedToMarkerIndex + 1) % points.length,
+              //     );
+              //
+              //     _animatedMapController.animateTo(
+              //       dest: points.elementAt(_lastMovedToMarkerIndex),
+              //       customId: _useTransformer ? _useTransformerId : null,
+              //       offset: const Offset(100, 100),
+              //     );
+              //   },
+              //   child: const Icon(Icons.multiple_stop),
+              // ),
+              const SizedBox.square(dimension: 8),
+
+              FloatingActionButton(
+                tooltip: 'View in realtime',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ARfunction()),
+                  );
+                },
+                child: const Icon(Icons.camera_alt),
+              ),
+
+
+            ],
           ),
         ],
       ),
@@ -274,3 +299,51 @@ final _animatedMoveTileUpdateTransformer = TileUpdateTransformer.fromHandlers(
     }
   },
 );
+
+/// Determine the current position of the device.
+///
+/// When the location services are not enabled or permissions
+/// are denied the `Future` will return an error.
+Future<latlong.LatLng> _determinePosition() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+  print("Went to chedk");
+
+  // Test if location services are enabled.
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+
+    // Location services are not enabled don't continue
+    // accessing the position and request users of the
+    // App to enable the location services.
+    return Future.error('Location services are disabled.');
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    print("DENIED");
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      // Permissions are denied, next time you could try
+      // requesting permissions again (this is also where
+      // Android's shouldShowRequestPermissionRationale
+      // returned true. According to Android guidelines
+      // your App should show an explanatory UI now.
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    // Permissions are denied forever, handle appropriately.
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
+
+  print("we have permission");
+
+  final position = await Geolocator.getCurrentPosition();
+
+  // print(position);
+
+  return latlong.LatLng(position.latitude, position.longitude);
+}
