@@ -114,6 +114,7 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Tree Map"),),
       body: ValueListenableBuilder<List<AnimatedMarker>>(
         valueListenable: markers,
         builder: (context, markers, _) {
