@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latlong;
 import 'package:latlong2/latlong.dart';
 import 'package:tree_bud/screens/loadpage.dart';
+import 'package:tree_bud/screens/widgets/PersonMarker.dart';
 import 'package:tree_bud/screens/widgets/SeparatedColumn.dart';
 import 'package:tree_bud/screens/widgets/TreeMarker.dart';
 
@@ -21,6 +22,7 @@ class MapFunction extends StatefulWidget {
 }
 
 class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin {
+  bool collapsedButtons = true;
 
   // Dummy trees
   List<Tree> trees = [];
@@ -45,7 +47,7 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
 
   void _addMarkersForTrees() {
     for (var tree in trees) {
-      _addMarker(tree.location);
+      addTreeMarker(tree.location);
     }
   }
 
@@ -67,6 +69,7 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
   void markCenter() async {
     print("went into this");
     center = await _determinePosition();
+    addPersonMarker(center);
 
   }
 
@@ -80,6 +83,32 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
     markers.dispose();
     _animatedMapController.dispose();
     super.dispose();
+  }
+
+  void addTreeMarker(LatLng point) {
+    markers.value = List.from(markers.value)
+      ..add(
+        TreeMarker(
+          point: point as latlong.LatLng,
+          onTap: () => _animatedMapController.animateTo(
+            dest: point as latlong.LatLng,
+            customId: _useTransformer ? _useTransformerId : null,
+          ),
+        ),
+      );
+  }
+
+  void addPersonMarker(LatLng point) {
+    markers.value = List.from(markers.value)
+      ..add(
+        PersonMarker(
+          point: point as latlong.LatLng,
+          onTap: () => _animatedMapController.animateTo(
+            dest: point as latlong.LatLng,
+            customId: _useTransformer ? _useTransformerId : null,
+          ),
+        ),
+      );
   }
 
   @override
@@ -108,162 +137,187 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
           );
         },
       ),
-      floatingActionButton: SeparatedColumn(
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.end,
         separator: const SizedBox(height: 8),
         children: [
-          // FloatingActionButton(
-          //   onPressed: () => _animatedMapController.animatedRotateFrom(
-          //     90,
-          //     customId: _useTransformer ? _useTransformerId : null,
-          //   ),
-          //   tooltip: 'Rotate 90°',
-          //   child: const Icon(Icons.rotate_right),
-          // ),
-          // FloatingActionButton(
-          //   onPressed: () => _animatedMapController.animatedRotateFrom(
-          //     -90,
-          //     customId: _useTransformer ? _useTransformerId : null,
-          //   ),
-          //   tooltip: 'Rotate -90°',
-          //   child: const Icon(Icons.rotate_left),
-          // ),
-          FloatingActionButton(
-            tooltip: 'Move to next marker',
-            onPressed: () {
-              if (markers.value.isEmpty) return;
 
-              final points = markers.value.map((m) => m.point);
-              setState(
-                    () => _lastMovedToMarkerIndex =
-                    (_lastMovedToMarkerIndex + 1) % points.length,
-              );
+          AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            height: collapsedButtons ? 0 : null, // Set height to null to let it expand
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // FloatingActionButton(
+                  //   onPressed: () => _animatedMapController.animatedRotateFrom(
+                  //     90,
+                  //     customId: _useTransformer ? _useTransformerId : null,
+                  //   ),
+                  //   tooltip: 'Rotate 90°',
+                  //   child: const Icon(Icons.rotate_right),
+                  // ),
+                  // FloatingActionButton(
+                  //   onPressed: () => _animatedMapController.animatedRotateFrom(
+                  //     -90,
+                  //     customId: _useTransformer ? _useTransformerId : null,
+                  //   ),
+                  //   tooltip: 'Rotate -90°',
+                  //   child: const Icon(Icons.rotate_left),
+                  // ),
+                  FloatingActionButton(
+                    heroTag: 'next_marker_button',
+                    tooltip: 'Move to next marker',
+                    onPressed: () {
+                      if (markers.value.isEmpty) return;
 
-              _animatedMapController.animateTo(
-                dest: points.elementAt(_lastMovedToMarkerIndex),
-                customId: _useTransformer ? _useTransformerId : null,
-              );
-            },
-            child: const Icon(Icons.not_listed_location),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              // markers.value = [];
-              markCenter();
-              _animatedMapController.animateTo(
-                dest: center,
-                rotation: 0,
-                customId: _useTransformer ? _useTransformerId : null,
-              );
-            },
-            tooltip: 'Go to your location',
-            child: const Icon(Icons.person_search,
-              color: Colors.red, ),
-          ),
-          FloatingActionButton(
-            onPressed: () => _animatedMapController.animatedZoomIn(
-              customId: _useTransformer ? _useTransformerId : null,
+                      final points = markers.value.map((m) => m.point);
+                      setState(
+                            () => _lastMovedToMarkerIndex =
+                            (_lastMovedToMarkerIndex + 1) % points.length,
+                      );
+
+                      _animatedMapController.animateTo(
+                        dest: points.elementAt(_lastMovedToMarkerIndex),
+                        customId: _useTransformer ? _useTransformerId : null,
+                      );
+                    },
+                    child: const Icon(Icons.not_listed_location),
+                  ),
+                  const SizedBox.square(dimension: 8),
+                  FloatingActionButton(
+                      heroTag: 'your_location_button',
+                    onPressed: () {
+                      // markers.value = [];
+                      markCenter();
+                      _animatedMapController.animateTo(
+                        dest: center,
+                        rotation: 0,
+                        customId: _useTransformer ? _useTransformerId : null,
+                      );
+                    },
+                    tooltip: 'Go to your location',
+                    child: const Icon(Icons.person_search,
+                      color: Colors.red, ),
+                  ),
+                  const SizedBox.square(dimension: 8),
+                  FloatingActionButton(
+                    heroTag: 'zoom_in_button',
+                    onPressed: () => _animatedMapController.animatedZoomIn(
+                      customId: _useTransformer ? _useTransformerId : null,
+                    ),
+                    tooltip: 'Zoom in',
+                    child: const Icon(Icons.zoom_in),
+                  ),
+                  const SizedBox.square(dimension: 8),
+                  FloatingActionButton(
+                    heroTag: 'zoom_out_button',
+                    onPressed: () => _animatedMapController.animatedZoomOut(
+                      customId: _useTransformer ? _useTransformerId : null,
+                    ),
+                    tooltip: 'Zoom out',
+                    child: const Icon(Icons.zoom_out),
+                  ),
+                  // FloatingActionButton(
+                  //   tooltip: 'Center on markers',
+                  //   onPressed: () {
+                  //     if (markers.value.length < 2) return;
+                  //
+                  //     final points = markers.value.map((m) => m.point).toList();
+                  //     _animatedMapController.animatedFitCamera(
+                  //       cameraFit: CameraFit.coordinates(
+                  //         coordinates: points,
+                  //         padding: const EdgeInsets.all(12),
+                  //       ),
+                  //       rotation: 0,
+                  //       customId: _useTransformer ? _useTransformerId : null,
+                  //     );
+                  //   },
+                  //   child: const Icon(Icons.center_focus_strong),
+                  // ),
+                ],
+              ),
             ),
-            tooltip: 'Zoom in',
-            child: const Icon(Icons.zoom_in),
           ),
-          FloatingActionButton(
-            onPressed: () => _animatedMapController.animatedZoomOut(
-              customId: _useTransformer ? _useTransformerId : null,
-            ),
-            tooltip: 'Zoom out',
-            child: const Icon(Icons.zoom_out),
-          ),
-          // FloatingActionButton(
-          //   tooltip: 'Center on markers',
-          //   onPressed: () {
-          //     if (markers.value.length < 2) return;
-          //
-          //     final points = markers.value.map((m) => m.point).toList();
-          //     _animatedMapController.animatedFitCamera(
-          //       cameraFit: CameraFit.coordinates(
-          //         coordinates: points,
-          //         padding: const EdgeInsets.all(12),
-          //       ),
-          //       rotation: 0,
-          //       customId: _useTransformer ? _useTransformerId : null,
-          //     );
-          //   },
-          //   child: const Icon(Icons.center_focus_strong),
-          // ),
+
           Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: 200, // Set your desired width here
-                child: FloatingActionButton(
-                  tooltip: 'Go to plant your own tree',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoadPage()),
-                    );
-                  },
-                  child: const Text("Plant your tree!"),
-                ),
-              ),
-              // FloatingActionButton(
-              //   tooltip: 'Move to next marker with offset',
-              //   onPressed: () {
-              //     if (markers.value.isEmpty) return;
-              //
-              //     final points = markers.value.map((m) => m.point);
-              //     setState(
-              //       () => _lastMovedToMarkerIndex =
-              //           (_lastMovedToMarkerIndex + 1) % points.length,
-              //     );
-              //
-              //     _animatedMapController.animateTo(
-              //       dest: points.elementAt(_lastMovedToMarkerIndex),
-              //       customId: _useTransformer ? _useTransformerId : null,
-              //       offset: const Offset(100, 100),
-              //     );
-              //   },
-              //   child: const Icon(Icons.multiple_stop),
-              // ),
-              const SizedBox.square(dimension: 8),
+             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+             children: [
 
-              FloatingActionButton(
-                tooltip: 'View in realtime',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ARfunction()),
-                  );
-                },
-                child: const Icon(Icons.camera_alt),
-              ),
+               FloatingActionButton(
+                 heroTag: 'navigate_ar_button',
+                 tooltip: 'View in realtime',
+                 onPressed: () {
+                   Navigator.push(
+                     context,
+                     MaterialPageRoute(builder: (context) => const ARfunction()),
+                   );
+                 },
+                 child: const Icon(Icons.camera_alt),
+               ),
+               const SizedBox.square(dimension: 8),
+               SizedBox(
+                 width: 200, // Set your desired width here
+                 child: FloatingActionButton(
+                   tooltip: 'Go to plant your own tree',
+                   onPressed: () {
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => LoadPage()),
+                     );
+                   },
+                   child: const Text("Plant your tree!"),
+                 ),
+               ),
+               // FloatingActionButton(
+               //   tooltip: 'Move to next marker with offset',
+               //   onPressed: () {
+               //     if (markers.value.isEmpty) return;
+               //
+               //     final points = markers.value.map((m) => m.point);
+               //     setState(
+               //       () => _lastMovedToMarkerIndex =
+               //           (_lastMovedToMarkerIndex + 1) % points.length,
+               //     );
+               //
+               //     _animatedMapController.animateTo(
+               //       dest: points.elementAt(_lastMovedToMarkerIndex),
+               //       customId: _useTransformer ? _useTransformerId : null,
+               //       offset: const Offset(100, 100),
+               //     );
+               //   },
+               //   child: const Icon(Icons.multiple_stop),
+               // ),
+               const SizedBox.square(dimension: 8),
+               FloatingActionButton(
+                 heroTag: 'show_tools_button',
+                 tooltip: 'Show tools',
+                 onPressed: () {
+                   setState(() {
+                     collapsedButtons = !collapsedButtons;
+                   });
+                 },
+
+                 child: collapsedButtons ? const Icon(Icons.arrow_drop_up,  size: 40):const Icon(Icons.arrow_drop_down,  size: 40),
+               ),
 
 
-            ],
-          ),
-        ],
+
+             ],
+
+           ),
+  ],
+         ),
+
       ),
+
     );
   }
-
-  void _addMarker(LatLng point) {
-    markers.value = List.from(markers.value)
-      ..add(
-        TreeMarker(
-          point: point as latlong.LatLng,
-          onTap: () => _animatedMapController.animateTo(
-            dest: point as latlong.LatLng,
-            customId: _useTransformer ? _useTransformerId : null,
-          ),
-        ),
-      );
-  }
 }
-
-
-
 
 
 /// Inspired by the contribution of [rorystephenson](https://github.com/fleaflet/flutter_map/pull/1475/files#diff-b663bf9f32e20dbe004bd1b58a53408aa4d0c28bcc29940156beb3f34e364556)
@@ -300,22 +354,13 @@ final _animatedMoveTileUpdateTransformer = TileUpdateTransformer.fromHandlers(
   },
 );
 
-/// Determine the current position of the device.
-///
-/// When the location services are not enabled or permissions
-/// are denied the `Future` will return an error.
 Future<latlong.LatLng> _determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
   print("Went to chedk");
 
-  // Test if location services are enabled.
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-
-    // Location services are not enabled don't continue
-    // accessing the position and request users of the
-    // App to enable the location services.
     return Future.error('Location services are disabled.');
   }
 
@@ -324,11 +369,6 @@ Future<latlong.LatLng> _determinePosition() async {
     print("DENIED");
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      // Permissions are denied, next time you could try
-      // requesting permissions again (this is also where
-      // Android's shouldShowRequestPermissionRationale
-      // returned true. According to Android guidelines
-      // your App should show an explanatory UI now.
       return Future.error('Location permissions are denied');
     }
   }
