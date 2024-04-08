@@ -17,6 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(
+            fontFamily: 'Montserrat-Regular',
+          ),
+
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const LoadPage(),

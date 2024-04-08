@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tree_bud/screens/widgets/MapWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -97,21 +98,20 @@ class _HomePageState extends State<HomePage> {
                 child: Stack(
                   children: [
                     // Red container
-                    Container(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width - 50,
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        border: Border.all(
-                          color: Color.fromRGBO(41, 57, 33, 1.0),
-                          width: 1,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width - 50,
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          border: Border.all(
+                            color: Color.fromRGBO(41, 57, 33, 1.0),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
+                        child: const MapWidget(),
                       ),
                     ),
                       Padding(padding: const EdgeInsets.only(top: 180),
@@ -126,12 +126,13 @@ class _HomePageState extends State<HomePage> {
                             bottomRight: Radius.circular(20),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Choose a tree!",
-                          style: TextStyle(
-                            color: Colors.blue,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Colors.blue, // Set your desired text color
                           ),
                         ),
+
                       ),)
 
                   ],
