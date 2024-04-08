@@ -62,7 +62,30 @@ class _HomePageState extends State<HomePage> {
                         bottomLeft: Radius.circular(70),
                       ),
                     ),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Choose",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            "& Name",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10
+                            ),
+                          ),)
+                      ],
+                    ),
                   ),
+
                   Container(
                     height: MediaQuery.of(context).size.width / 3,
                     width: MediaQuery.of(context).size.width / 3,
@@ -106,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                           color: Colors.redAccent,
                           border: Border.all(
-                            color: Color.fromRGBO(41, 57, 33, 1.0),
+                            color: const Color.fromRGBO(41, 57, 33, 1.0),
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),

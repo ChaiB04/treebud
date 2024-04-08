@@ -55,8 +55,11 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
   final markers = ValueNotifier<List<AnimatedMarker>>([]);
   latlong.LatLng center = const latlong.LatLng(51.509364, -0.128928);
 
+  late latlong.LatLng myPosition;
+
   @override
   void initState()  {
+    myPosition = const latlong.LatLng(0, 0);
     initializer();
     super.initState();
   }
@@ -68,15 +71,15 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
     _addMarkersForTrees();
   }
 
-  late Future<latlong.LatLng> myPosition;
+
 
   void markCenter() async {
     print("went into this");
-    setState(() async {
-      myPosition = _determinePosition();
-
+    myPosition = await _determinePosition();
+    addPersonMarker(myPosition);
+    setState(()  {
     });
-    addPersonMarker(myPosition as latlong.LatLng);
+
     // center = positionReady(center);
   }
   void addPersonMarker(LatLng point) {
@@ -126,7 +129,7 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<LatLng>(
-        future: myPosition,
+        future: Future.value(myPosition),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
