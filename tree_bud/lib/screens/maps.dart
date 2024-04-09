@@ -28,7 +28,6 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
   List<Tree> trees = [];
 
   void addToTreeList() {
-    // Creating new user and task history for the new tree
     User user3 = User('user3', 'Alice Johnson', 'pass');
     User user4 = User('user4', 'Bob Brown', 'pass');
 
@@ -40,8 +39,8 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
     };
 
     // Creating a new tree and adding it to the list
-    trees.add(Tree('3', 'Maple Tree', LatLng(52.5200, 13.4050), user3, newTaskHistory, caretakers));
-    trees.add(Tree('4', 'Apple Tree', LatLng(52.2341, 13.2454), user4, newTaskHistory,caretakers));
+    trees.add(Tree('3', 'Maple Tree', const LatLng(52.5200, 13.4050), user3, newTaskHistory, caretakers));
+    trees.add(Tree('4', 'Apple Tree', const LatLng(52.2341, 13.2454), user4, newTaskHistory,caretakers));
   }
 
 
@@ -56,21 +55,29 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
   static const _useTransformerId = 'useTransformerId';
 
   final markers = ValueNotifier<List<AnimatedMarker>>([]);
-  latlong.LatLng center = const latlong.LatLng(51.509364, -0.128928);
+  // latlong.LatLng center = const latlong.LatLng(51.509364, -0.128928);
+    latlong.LatLng? center;
 
   @override
   void initState()  {
-    markCenter();
+    super.initState();
+    markCenter().then((result) {
+      setState(() {
+      });
+    });
     addToTreeList();
     _addMarkersForTrees();
-    super.initState();
+    
   }
 
-  void markCenter() async {
+  Future<void> markCenter() async {
     print("went into this");
     center = await _determinePosition();
-    addPersonMarker(center);
-
+    print("Center:" + center.toString());
+    addPersonMarker(center!);
+//    _animatedMapController.mapController.move(center, 10);
+    // setState(() {
+    // });
   }
 
   bool _useTransformer = true;
@@ -113,17 +120,24 @@ class _MapFunctionState extends State<MapFunction> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(title: const Text("Tree Map"),),
       body: ValueListenableBuilder<List<AnimatedMarker>>(
         valueListenable: markers,
         builder: (context, markers, _) {
           // markCenter();
+          if(center == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return FlutterMap(
-
+            
             mapController: _animatedMapController.mapController,
             options: MapOptions(
-              initialCenter: center,
+              initialCenter: center!,
+              keepAlive: true,
               // onPositionChanged: (_, point) => _updateMarker(),
             ),
             children: [
@@ -384,7 +398,7 @@ Future<latlong.LatLng> _determinePosition() async {
 
   final position = await Geolocator.getCurrentPosition();
 
-  // print(position);
+   print(position);
 
   return latlong.LatLng(position.latitude, position.longitude);
 }

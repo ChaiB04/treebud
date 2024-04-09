@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
         textTheme: const TextTheme(
-          bodyText2: TextStyle(
+          bodyText1: TextStyle(
             fontFamily: 'Montserrat-Regular',
           ),
 
@@ -32,3 +32,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+//collapse collider
