@@ -1,3 +1,4 @@
+import 'package:ar_function/widgets/historyname.dart';
 import 'package:flutter/material.dart';
 
 class InfoTree extends StatelessWidget {
@@ -30,123 +31,38 @@ class InfoTree extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: const Color(0x4D9489F5),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 2,
+            Container(
+            color: const Color.fromARGB(255, 10, 48, 11),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'History',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(2),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: Image.network(
-                          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                      child: Text(
-                        'You',
-                        style: TextStyle(
-                          fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF15161E),
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    '4m ago',
-                    style: TextStyle(
-                      fontFamily: 'Plus Jakarta Sans',
-                      color: Color(0xFF606A85),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 0,
-                      color: Theme.of(context).primaryColor,
-                      offset: const Offset(-2, 0),
-                    )
-                  ],
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 1,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(26, 0, 0, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                        child: RichText(
-                          text: TextSpan(
-                            children: const [
-                              TextSpan(
-                                text: 'Watered tree',
-                                style: TextStyle(),
-                              ),
-                              TextSpan(
-                                text: ' 2 minutes ago',
-                                style: TextStyle(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Color(0xFF496124),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
-                            style: TextStyle(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                    ],
-                  ),
+                ProfileInfo(
+                  imageUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
+                  name: 'You',
+                  task: 'Watered tree ',
+                  time: '5 hours ago',
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                InfoCard(task: 'Watered tree ', time: '5 hours ago',),
+              ],
+    ),
+    ),
+    ],
+    ),
+    ),
     );
   }
 }
