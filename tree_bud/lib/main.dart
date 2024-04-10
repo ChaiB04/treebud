@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const InfoTree(),
+      home: InfoTree(),
       routes: {
         '/ARfunction': (context) => const ARfunction(),
       }

@@ -2,7 +2,7 @@ import 'package:ar_function/widgets/historyname.dart';
 import 'package:flutter/material.dart';
 
 class InfoTree extends StatelessWidget {
-  const InfoTree({super.key});
+  InfoTree({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +22,45 @@ class InfoTree extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, bottom: 32.0),
+            padding: const EdgeInsets.only(top: 12.0, bottom: 32.0),
             child: Column(
               children: [
-               const Center(
+              Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
+                   const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       'Pamela',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
+                    
                       ),
                     ),
                   ),
 
-                  Padding(
-                    padding:  EdgeInsets.only(left: 5.0, bottom: 35.0),
-                    child: Icon(
-                      Icons.info, 
-                      color: Colors.white, 
-                      size: 20
-                    ),),
+                   Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context, 
+                          builder: (context) => AlertDialog(
+                            content: Text('* INFO TREE'),
+                            actions: [
+                              TextButton(
+                                onPressed: (){
+                                Navigator.pop(context);
+                              }, 
+                              child: const Text('Close'))],
+                          ),
+                          );
+                      }, icon: Icon(Icons.info, color: Colors.white,),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -128,7 +141,7 @@ class InfoTree extends StatelessWidget {
 
                 ProfileInfo(
                   imageUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
-                  name: 'You',
+                  name: 'Ian Craig',
                   task: 'Watered tree ',
                   time: '5 hours ago',
                 ),
@@ -136,7 +149,7 @@ class InfoTree extends StatelessWidget {
                 
                 ProfileInfo(
                   imageUrl: 'https://images.unsplash.com/photo-1558072844-b2e8b546d415?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
-                  name: 'Nicole Kerr', 
+                  name: 'You', 
                   task: 'Cleaned tree ', 
                   time: '1 day ago'
                 ),

@@ -50,7 +50,7 @@ class _ARfunctionState extends State<ARfunction> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const InfoTree()),
+      MaterialPageRoute(builder: (context) => InfoTree()),
     );
   }
 
