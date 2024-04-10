@@ -22,31 +22,89 @@ class InfoTree extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
+            padding: const EdgeInsets.only(top: 20.0, bottom: 32.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-               const Padding(
-                padding: EdgeInsets.only(bottom: 14.0),
+               const Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Pamela ',
+                   Padding(
+                    padding: EdgeInsets.only(bottom: 12.0),
+                    child: Text(
+                      'Pamela',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Icon(
+                  ),
+
+                  Padding(
+                    padding:  EdgeInsets.only(left: 5.0, bottom: 35.0),
+                    child: Icon(
                       Icons.info, 
                       color: Colors.white, 
-                      size: 20),
-                    ]
+                      size: 20
+                    ),),
+                  ],
                 ),
               ),
-              
-              
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(73, 97, 36, 1.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Clean it',
+                      style: TextStyle(
+                        color: Colors.white, 
+                      ),
+                    ),
+                  ),
+                    ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(73, 97, 36, 1.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Feed it',
+                      style: TextStyle(
+                        color: Colors.white, 
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(73, 97, 36, 1.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Water it',
+                      style: TextStyle(
+                        color: Colors.white, 
+                      ),
+                    ),
+                  ),
+                  ],
+                ),
+              ],
+            ),
+          ),
 
           Container(
             color: const Color.fromARGB(255, 10, 48, 11),
@@ -95,11 +153,8 @@ class InfoTree extends StatelessWidget {
               ],
             ),
           ),
-              ],
-            ),
-          ),
         ],
       ),
-      );
+    );
   }
 }
