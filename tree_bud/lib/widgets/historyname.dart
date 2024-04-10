@@ -8,7 +8,7 @@ class ProfileInfo extends StatelessWidget {
   final String task;
   final String time;
 
-  const ProfileInfo({
+  const ProfileInfo( {
     super.key,
     required this.imageUrl,
     required this.name,

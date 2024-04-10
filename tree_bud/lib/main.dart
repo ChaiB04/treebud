@@ -1,7 +1,5 @@
 import 'package:ar_function/screens/infotree.dart';
-import 'package:ar_function/screens/loadpage.dart';
 import 'package:ar_function/screens/arfunction.dart';
-import 'package:ar_function/widgets/historyname.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: InfoTree(),
+      home:  InfoTree(),
       routes: {
         '/ARfunction': (context) => const ARfunction(),
       }

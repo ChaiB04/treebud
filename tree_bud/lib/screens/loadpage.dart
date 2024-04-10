@@ -5,11 +5,6 @@ class LoadPage extends StatelessWidget {
   const LoadPage({super.key});
 
   @override
-  void initState() {
-    initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
