@@ -1,6 +1,7 @@
 import "package:tree_bud/screens/arfunction.dart";
 import "package:flutter/material.dart";
 import "package:tree_bud/screens/homepage.dart";
+import "package:tree_bud/screens/newTree.dart";
 
 import "maps.dart";
 
@@ -44,7 +45,14 @@ class LoadPage extends StatelessWidget {
                   );
                 },
                 child: const Text("Homepage")),
-
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NewTree()),
+                  );
+                },
+                child: const Text("Add tree")),
           ],
         ),
         ),
