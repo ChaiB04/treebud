@@ -15,7 +15,8 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 40,
         backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
-        actions: const [
+        actions:
+        const [
           CircleAvatar(
             radius: 25,
             backgroundImage: NetworkImage(
