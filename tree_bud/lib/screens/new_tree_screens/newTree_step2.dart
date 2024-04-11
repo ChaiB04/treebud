@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tree_bud/screens/newTree_step3.dart';
+import 'package:tree_bud/screens/new_tree_screens/newTree_step3.dart';
 
 class NewTreeStep2 extends StatefulWidget {
   const NewTreeStep2({super.key});

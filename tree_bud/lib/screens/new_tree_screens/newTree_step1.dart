@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tree_bud/screens/newTree_step2.dart';
+import 'package:tree_bud/screens/new_tree_screens/newTree_step2.dart';
 
 class NewTreeStep1 extends StatefulWidget {
   const NewTreeStep1({super.key});

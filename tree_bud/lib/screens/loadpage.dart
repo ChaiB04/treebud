@@ -1,7 +1,7 @@
 import "package:tree_bud/screens/arfunction.dart";
 import "package:flutter/material.dart";
 import "package:tree_bud/screens/homepage.dart";
-import "package:tree_bud/screens/newTree_step1.dart";
+import "package:tree_bud/screens/new_tree_screens/newTree_step1.dart";
 
 import "maps.dart";
 
