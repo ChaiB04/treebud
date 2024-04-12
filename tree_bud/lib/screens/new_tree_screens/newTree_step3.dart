@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../homepage.dart';
+
 class NewTreeStep3 extends StatefulWidget {
   const NewTreeStep3({super.key});
 
@@ -24,7 +26,6 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
           ),
         ],
       ),
-
       body: Stack(
         children: [
           //Background color (gradient)
@@ -55,7 +56,8 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top:  MediaQuery.of(context).size.height / 6),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 6),
                 child: Center(
                   child: Stack(
                     children: [
@@ -67,26 +69,57 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                           ),
                         ),
                       ),
-                      const Center(
+                      Center(
                         child: Padding(
-                          padding: EdgeInsets.only(right: 40, top: 20),
-                          child: SizedBox(
-                            width: 125,
-                            child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Color.fromRGBO(245, 247, 248, 1.0)),
+                            padding: const EdgeInsets.only(right: 40, top: 20),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  width: 125,
+                                  child: TextField(
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color.fromRGBO(
+                                                245, 247, 248, 1.0)),
+                                      ),
+                                      labelText: 'Name',
+                                      labelStyle: TextStyle(
+                                          color: Color.fromRGBO(
+                                              245, 247, 248, 1.0)),
+                                    ),
+                                  ),
                                 ),
-                                labelText: 'Name',
-                                labelStyle: TextStyle(
-                                    color: Color.fromRGBO(245, 247, 248, 1.0)),
-                              ),
-                            ),
-                          ),
-                        ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 70),
+                                  child: FilledButton(
+                                    onPressed: () {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const HomePage()),
+                                            (route) => false,
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                        const Color.fromRGBO(73, 97, 36, 1.0),
+                                      ),
+                                      // Setting border
+                                      shape: MaterialStateProperty.all<
+                                          OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                    ),
+                                    child: const Text('Plant the tree!'),
+                                  ),
+                                ),
+                              ],
+                            )),
                       ),
                     ],
                   ),
