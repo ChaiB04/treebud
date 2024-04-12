@@ -126,7 +126,7 @@ class _MapFunctionState extends State<MapFunction>
                   Text('Getting your location...'),
                   SizedBox(height: 10),
                   CircularProgressIndicator(
-                    backgroundColor: Color.fromRGBO(0x97, 0xBE, 0x61, 1.0),
+                    backgroundColor: Color.fromRGBO(245, 247, 248, 1.0),
                   ),
                 ],
               ),

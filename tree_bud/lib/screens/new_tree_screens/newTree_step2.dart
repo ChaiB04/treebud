@@ -16,6 +16,7 @@ class _NewTreeStep2State extends State<NewTreeStep2> {
           toolbarHeight: 40,
           backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
           actions: const [
+            //Profile picture
             CircleAvatar(
               radius: 25,
               backgroundImage: NetworkImage(
@@ -161,6 +162,8 @@ class _NewTreeStep2State extends State<NewTreeStep2> {
                    ],
                  ),
                ),
+
+                //Loading bar
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 25),

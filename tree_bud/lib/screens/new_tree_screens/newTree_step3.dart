@@ -15,6 +15,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
         toolbarHeight: 40,
         backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
         actions: const [
+          //Profile picture
           CircleAvatar(
             radius: 25,
             backgroundImage: NetworkImage(
@@ -23,6 +24,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
           ),
         ],
       ),
+
       body: Stack(
         children: [
           //Background color (gradient)
@@ -91,7 +93,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                 ),
               ),
 
-              // Expanded column containing the last two containers
+              //Loading bar
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 25),
