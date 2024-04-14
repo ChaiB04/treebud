@@ -159,7 +159,7 @@ class _MapFunctionState extends State<MapFunction>
           separator: const SizedBox(height: 8),
           children: [
             AnimatedContainer(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               height: collapsedButtons ? 0 : null,
               child: SingleChildScrollView(
                 child: Column(
@@ -248,7 +248,7 @@ class _MapFunctionState extends State<MapFunction>
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoadPage()),
+                        MaterialPageRoute(builder: (context) => const LoadPage()),
                       );
                     },
                     child: const Text("Plant your tree!"),

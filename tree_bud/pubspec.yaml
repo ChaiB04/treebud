@@ -43,6 +43,7 @@ dependencies:
 
 
 
+  flutter_map: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -37,9 +37,9 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
     };
 
     // Creating a new tree and adding it to the list
-    trees.add(Tree('3', 'Maple Tree', LatLng(52.5200, 13.4050), user3,
+    trees.add(Tree('3', 'Maple Tree', const LatLng(52.5200, 13.4050), user3,
         newTaskHistory, caretakers));
-    trees.add(Tree('4', 'Apple Tree', LatLng(52.2341, 13.2454), user4,
+    trees.add(Tree('4', 'Apple Tree', const LatLng(52.2341, 13.2454), user4,
         newTaskHistory, caretakers));
   }
 

@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
         textTheme: const TextTheme(
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             fontFamily: 'Montserrat-Regular',
           ),
 

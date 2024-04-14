@@ -57,5 +57,6 @@ Future<User?> login(String username, String password) async {
   catch (e) {
     print('Error connecting to MongoDB: $e');
   }
+  return null;
 }
 
