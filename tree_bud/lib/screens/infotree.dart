@@ -1,3 +1,4 @@
+import "package:flutter/cupertino.dart";
 import "package:tree_bud/screens/arfunction.dart";
 import "package:flutter/material.dart";
 import "package:tree_bud/widgets/historyname.dart";
@@ -9,15 +10,16 @@ class InfoTree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
         toolbarHeight: 40,
+        backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
+        iconTheme: const IconThemeData(color: Color.fromRGBO(245, 247, 248, 1.0)),
       ),
       backgroundColor: const Color.fromARGB(255, 118, 131, 109),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            'assets/images/boomstam.png',
+            'assets/images/banner.png',
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -45,144 +47,214 @@ class InfoTree extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 15.0),
                         child: IconButton(
                           onPressed: () {
-showDialog(
-  context: context,
-  builder: (context) => Dialog(
-    insetPadding: EdgeInsets.zero,
-    backgroundColor: Colors.transparent,
-    child: SizedBox(
-      height: 300,
-      width: MediaQuery.of(context).size.width,
-      child: AlertDialog(
-        title: const Padding(
-          padding: EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            'Pamela',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        backgroundColor: const Color.fromRGBO(232, 235, 235, 1.0),
-        contentPadding: EdgeInsets.zero,
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(41, 57, 33, 1.0),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.zero,
-                      bottomLeft: Radius.zero,
-                      bottomRight: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0), 
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(8.0),
-                  width: 108,
-                  child: const Text(
-                    'Carbon Offset',
-                    style: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(151, 190, 97, 1.0),
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30.0),
-                      bottomLeft: Radius.circular(30.0),
-                      bottomRight: Radius.circular(30.0),
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(8.0),
-                  width: 100,
-                  height: 70,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '2,340',
-                        style: TextStyle(color: Color.fromRGBO(41, 57, 33, 1.0), fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Carbon(t)',
-                        style: TextStyle(color: Color.fromRGBO(41, 57, 33, 1.0), fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    color:  Color.fromRGBO(41, 57, 33, 1.0),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      bottomLeft: Radius.circular(10.0),
-                      bottomRight: Radius.zero,
-                      topRight: Radius.zero, 
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(8.0),
-                  width: 108,
-                  child: const Text(
-                    'Planted on',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(151, 190, 97, 1.0),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      bottomLeft: Radius.circular(30.0),
-                      bottomRight: Radius.circular(30.0),
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(8.0),
-                  width: 100,
-                  height: 70,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '2024',
-                        style: TextStyle(color: Color.fromRGBO(41, 57, 33, 1.0), fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '14th January',
-                        style: TextStyle(color: Color.fromRGBO(41, 57, 33, 1.0), fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
-          )
-        ],
-      ),
-    ),
-  ),
-
+                            showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                child: SizedBox(
+                                  height: 330,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: AlertDialog(
+                                    title: const Padding(
+                                      padding: EdgeInsets.only(bottom: 15.0),
+                                      child: Text(
+                                        'Pamela',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 28.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    backgroundColor: const Color.fromRGBO(
+                                        232, 235, 235, 1.0),
+                                    contentPadding: EdgeInsets.zero,
+                                    content: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    41, 57, 33, 1.0),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.zero,
+                                                  bottomLeft: Radius.zero,
+                                                  bottomRight:
+                                                      Radius.circular(10.0),
+                                                  topRight:
+                                                      Radius.circular(10.0),
+                                                ),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              width: 108,
+                                              child: const Text(
+                                                'Carbon Offset',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    151, 190, 97, 1.0),
+                                                borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(30.0),
+                                                  bottomLeft:
+                                                      Radius.circular(30.0),
+                                                  bottomRight:
+                                                      Radius.circular(30.0),
+                                                ),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              width: 100,
+                                              height: 70,
+                                              child: const Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '2,340',
+                                                    style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            41, 57, 33, 1.0),
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    'Carbon(t)',
+                                                    style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            41, 57, 33, 1.0),
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    41, 57, 33, 1.0),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(10.0),
+                                                  bottomLeft:
+                                                      Radius.circular(10.0),
+                                                  bottomRight: Radius.zero,
+                                                  topRight: Radius.zero,
+                                                ),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              width: 108,
+                                              child: const Text(
+                                                'Planted on',
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14.0,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromRGBO(
+                                                    151, 190, 97, 1.0),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(30.0),
+                                                  bottomLeft:
+                                                      Radius.circular(30.0),
+                                                  bottomRight:
+                                                      Radius.circular(30.0),
+                                                ),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              width: 100,
+                                              height: 70,
+                                              child: const Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '2024',
+                                                    style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            41, 57, 33, 1.0),
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    '14th January',
+                                                    style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            41, 57, 33, 1.0),
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(
+                                              const Color.fromRGBO(
+                                                  73, 97, 36, 1.0),
+                                            ), // Change Colors.blue to your desired color
+                                            shape: MaterialStateProperty.all<
+                                                OutlinedBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            'Close',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  245, 247, 248, 1.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             );
                           },
                           icon: const Icon(

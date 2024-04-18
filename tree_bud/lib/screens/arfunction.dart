@@ -67,6 +67,11 @@ class _ARfunctionState extends State<ARfunction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 40,
+        backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
+        iconTheme: const IconThemeData(color: Color.fromRGBO(245, 247, 248, 1.0)),
+      ),
       body: Stack(
         children: [
           ArCoreView(
@@ -75,10 +80,6 @@ class _ARfunctionState extends State<ARfunction> {
           GestureDetector(
             onTap: () => navigateToNewPage(context),
             behavior: HitTestBehavior.translucent,
-          ),
-          ElevatedButton(
-            onPressed: () => navigateToMainPage(context),
-            child: const Text("Back"),
           ),
         ],
       ),
