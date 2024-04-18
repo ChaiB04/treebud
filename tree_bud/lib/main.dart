@@ -1,3 +1,4 @@
+import 'package:tree_bud/screens/homepage.dart';
 import 'package:tree_bud/screens/loadpage.dart';
 import 'package:tree_bud/screens/arfunction.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoadPage(),
-      routes: {
-        '/ARfunction': (context) => const ARfunction(),
-      }
+      home: const HomePage(),
+      // routes: {
+      //   '/ARfunction': (context) => const ARfunction(),
+      // }
     );
   }
 }

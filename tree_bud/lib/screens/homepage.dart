@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tree_bud/screens/widgets/MapWidget.dart';
 
+import 'maps.dart';
+import 'new_tree_screens/newTree_step1.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,8 +18,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 40,
         backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
-        actions:
-        const [
+        actions: const [
           CircleAvatar(
             radius: 25,
             backgroundImage: NetworkImage(
@@ -210,16 +212,19 @@ class _HomePageState extends State<HomePage> {
 
           //maps + details of maps
           Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 2.5),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 125),
-                      child: Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width - 50,
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.5),
+            child: Center(
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 125),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 220,
+                          width: MediaQuery.of(context).size.width - 80,
                           decoration: BoxDecoration(
                             color: const Color.fromRGBO(41, 57, 33, 1.0),
                             borderRadius: BorderRadius.circular(20),
@@ -228,9 +233,10 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.only(
-                                  top: 100.0,
-                                  left: 10.0,
-                                  right: 10.0,
+                                  top: 110.0,
+                                  left: 15.0,
+                                  right: 15.0,
+                                  bottom: 5.0,
                                 ),
                                 child: Text(
                                     "Find your tree buddies and take care of them together!",
@@ -239,7 +245,15 @@ class _HomePageState extends State<HomePage> {
                                     )),
                               ),
                               FilledButton(
-                                onPressed: () => {},
+                                onPressed: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NewTreeStep1(),
+                                    ),
+                                  ),
+                                },
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -256,51 +270,103 @@ class _HomePageState extends State<HomePage> {
                                 child: const Text('Plant your own!'),
                               ),
                             ],
-                          )),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width - 50,
-                        decoration: BoxDecoration(
-                          color: Colors.redAccent,
-                          border: Border.all(
-                            color: const Color.fromRGBO(41, 57, 33, 1.0),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const MapWidget(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 180),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 45),
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(73, 97, 36, 1.0),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
                           ),
                         ),
-                        child: Text(
-                          "Choose a tree!",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: const Color.fromRGBO(245, 247, 248, 1.0),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            child: Container(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width - 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: const Color.fromRGBO(41, 57, 33, 1.0),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(15),
                               ),
-                        ),
+                              child: const ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                  // bottomLeft: Radius.zero,
+                                  // bottomRight: Radius.zero,
+                                ),
+                                child: MapWidget(),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MapFunction()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromRGBO(73, 97, 36, 1.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: const Icon(
+                                      Icons.fullscreen_rounded,
+                                      color: Color.fromRGBO(245, 247, 248, 1.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 180),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 45),
+                              decoration: const BoxDecoration(
+                                color: Color.fromRGBO(73, 97, 36, 1.0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                "Choose a tree!",
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: const Color.fromRGBO(245, 247, 248, 1.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ))
+                    ],
+                  ),
+
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

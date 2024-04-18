@@ -127,20 +127,21 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
           }
 
           return FlutterMap(
-            mapController: _animatedMapController.mapController,
-            options: MapOptions(
-              initialCenter: center!,
-            ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
-                tileUpdateTransformer: _animatedMoveTileUpdateTransformer,
-                tileProvider: CancellableNetworkTileProvider(),
+              mapController: _animatedMapController.mapController,
+              options: MapOptions(
+                initialCenter: center!,
               ),
-              AnimatedMarkerLayer(markers: markers),
-            ],
-          );
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.app',
+                  tileUpdateTransformer: _animatedMoveTileUpdateTransformer,
+                  tileProvider: CancellableNetworkTileProvider(),
+                ),
+                AnimatedMarkerLayer(markers: markers),
+              ],
+            );
+
         },
       ),
     );

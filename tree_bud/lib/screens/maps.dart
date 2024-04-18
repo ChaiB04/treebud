@@ -151,9 +151,7 @@ class _MapFunctionState extends State<MapFunction>
           );
         },
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: SeparatedColumn(
+      floatingActionButton: SeparatedColumn(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           separator: const SizedBox(height: 8),
@@ -182,7 +180,15 @@ class _MapFunctionState extends State<MapFunction>
                           customId: _useTransformer ? _useTransformerId : null,
                         );
                       },
-                      child: const Icon(Icons.not_listed_location),
+                      backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                      elevation: 0, // Set elevation to 0 to remove shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: const Icon(
+                        Icons.not_listed_location,
+                        color: Color.fromRGBO(245, 247, 248, 1.0),
+                      ),
                     ),
                     const SizedBox.square(dimension: 8),
                     FloatingActionButton(
@@ -196,10 +202,15 @@ class _MapFunctionState extends State<MapFunction>
                           customId: _useTransformer ? _useTransformerId : null,
                         );
                       },
+                      backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                      elevation: 0, // Set elevation to 0 to remove shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       tooltip: 'Go to your location',
                       child: const Icon(
                         Icons.person_search,
-                        color: Colors.red,
+                        color: Color.fromRGBO(245, 247, 248, 1.0),
                       ),
                     ),
                     const SizedBox.square(dimension: 8),
@@ -208,8 +219,16 @@ class _MapFunctionState extends State<MapFunction>
                       onPressed: () => _animatedMapController.animatedZoomIn(
                         customId: _useTransformer ? _useTransformerId : null,
                       ),
+                      backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                      elevation: 0, // Set elevation to 0 to remove shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       tooltip: 'Zoom in',
-                      child: const Icon(Icons.zoom_in),
+                      child: const Icon(
+                        Icons.zoom_in,
+                        color: Color.fromRGBO(245, 247, 248, 1.0),
+                      ),
                     ),
                     const SizedBox.square(dimension: 8),
                     FloatingActionButton(
@@ -217,20 +236,26 @@ class _MapFunctionState extends State<MapFunction>
                       onPressed: () => _animatedMapController.animatedZoomOut(
                         customId: _useTransformer ? _useTransformerId : null,
                       ),
+                      backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                      elevation: 0, // Set elevation to 0 to remove shadow
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       tooltip: 'Zoom out',
-                      child: const Icon(Icons.zoom_out),
+                      child: const Icon(
+                        Icons.zoom_out,
+                        color: Color.fromRGBO(245, 247, 248, 1.0),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
-                  heroTag: 'navigate_ar_button',
-                  tooltip: 'View in realtime',
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -238,19 +263,40 @@ class _MapFunctionState extends State<MapFunction>
                           builder: (context) => const ARfunction()),
                     );
                   },
-                  child: const Icon(Icons.camera_alt),
+                  backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Color.fromRGBO(245, 247, 248, 1.0),
+                  ),
                 ),
                 const SizedBox.square(dimension: 8),
                 SizedBox(
-                  width: 200, // Set your desired width here
-                  child: FloatingActionButton(
-                    tooltip: 'Go to plant your own tree',
+                  width: 200,
+                  height: 55,
+                  child: FilledButton(
+                    // tooltip: 'Go to plant your own tree',
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const LoadPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const LoadPage(),
+                        ),
                       );
                     },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(73, 97, 36, 1.0),
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
                     child: const Text("Plant your tree!"),
                   ),
                 ),
@@ -263,15 +309,28 @@ class _MapFunctionState extends State<MapFunction>
                       collapsedButtons = !collapsedButtons;
                     });
                   },
+                  backgroundColor: const Color.fromRGBO(73, 97, 36, 1.0),
+                  elevation: 0, // Set elevation to 0 to remove shadow
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                   child: collapsedButtons
-                      ? const Icon(Icons.arrow_drop_up, size: 40)
-                      : const Icon(Icons.arrow_drop_down, size: 40),
+                      ? const Icon(
+                          Icons.arrow_drop_up,
+                          size: 40,
+                          color: Color.fromRGBO(245, 247, 248, 1.0),
+                        )
+                      : const Icon(
+                          Icons.arrow_drop_down,
+                          size: 40,
+                          color: Color.fromRGBO(245, 247, 248, 1.0),
+                        ),
                 ),
               ],
             ),
           ],
         ),
-      ),
+
     );
   }
 }

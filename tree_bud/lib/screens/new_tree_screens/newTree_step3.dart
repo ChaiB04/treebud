@@ -54,8 +54,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                   child: Text(
                     "Choose a name",
                     style: TextStyle(
-                        fontSize: 30,
-                        color: Color.fromRGBO(41, 57, 33, 1.0)),
+                        fontSize: 30, color: Color.fromRGBO(41, 57, 33, 1.0)),
                   ),
                 ),
                 Center(
@@ -89,8 +88,10 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                                     ),
                                     labelText: 'Name',
                                     labelStyle: TextStyle(
-                                        color:
-                                            Color.fromRGBO(245, 247, 248, 1.0)),
+                                      color: Color.fromRGBO(245, 247, 248, 1.0),
+
+                                    ),
+
                                   ),
                                 ),
                               ),
