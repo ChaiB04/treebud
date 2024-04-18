@@ -1,4 +1,4 @@
-import 'package:tree_bud/screens/homepage.dart'
+import 'package:tree_bud/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
