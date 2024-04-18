@@ -8,12 +8,12 @@ class ProfileInfo extends StatelessWidget {
   final String task;
   final String time;
 
-  const ProfileInfo({
+  const ProfileInfo( {
     super.key,
     required this.imageUrl,
     required this.name,
     this.backgroundColor = const Color.fromARGB(255, 10, 48, 11),
-    this.textColor = Colors.white, required this.task, required this.time,
+    this.textColor = const Color.fromRGBO(245,247,248, 1.0), required this.task, required this.time,
   });
 
   @override
@@ -31,7 +31,7 @@ class ProfileInfo extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white,
+                color: const Color.fromRGBO(245,247,248, 1.0),
               ),
             ),
             child: Padding(
@@ -59,7 +59,7 @@ class ProfileInfo extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: textColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -72,13 +72,14 @@ class ProfileInfo extends StatelessWidget {
                         text: task,
                         style: const TextStyle(
                           color: Colors.white,
+                          fontWeight: FontWeight.w200
                         ),
                       ),
                       TextSpan(
                         text: time,
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          color:Color.fromRGBO(245,247,248, 1.0),
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -115,7 +116,7 @@ class InfoCard extends StatelessWidget {
           color: Color.fromARGB(255, 10, 48, 11),
           boxShadow: [
             BoxShadow(
-              color: Colors.white,
+              color: Color.fromRGBO(245,247,248, 1.0),
               offset: Offset(-2, 0),
             ),
           ],
@@ -128,7 +129,7 @@ class InfoCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6, left: 20),
                 child: RichText(
-                  text:const  TextSpan(
+                  text: const TextSpan(
                     children: [
                     ],
                   ),
