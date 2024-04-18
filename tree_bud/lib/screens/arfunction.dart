@@ -24,6 +24,7 @@ class _ARfunctionState extends State<ARfunction> {
     displayPinpointMarker(coreController!);
   }
 
+// Source: https://github.com/giandifra/arcore_flutter_plugin/issues/66
   Future<void> displayPinpointMarker(ArCoreController controller) async {
     final bytes =
         (await rootBundle.load('assets/images/marker.png')).buffer.asUint8List();
