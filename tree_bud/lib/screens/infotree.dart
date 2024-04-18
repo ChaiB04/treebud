@@ -1,5 +1,5 @@
-import 'package:ar_function/widgets/historyname.dart';
-import 'package:flutter/material.dart';
+import "package:tree_bud/screens/arfunction.dart";
+import "package:flutter/material.dart";
 
 class InfoTree extends StatelessWidget {
   const InfoTree({Key? key}) : super(key: key);
