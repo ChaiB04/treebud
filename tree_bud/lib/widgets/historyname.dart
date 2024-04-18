@@ -75,11 +75,12 @@ class ProfileInfo extends StatelessWidget {
                           fontWeight: FontWeight.w200
                         ),
                       ),
+                      TextSpan(text: " "),
                       TextSpan(
                         text: time,
                         style: const TextStyle(
                           color:Color.fromRGBO(245,247,248, 1.0),
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
