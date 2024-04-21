@@ -5,7 +5,9 @@ import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_ti
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latlong;
 import 'package:latlong2/latlong.dart';
+import 'package:tree_bud/screens/homepage.dart';
 import 'package:tree_bud/screens/loadpage.dart';
+import 'package:tree_bud/screens/new_tree_screens/newTree_step1.dart';
 import 'package:tree_bud/screens/widgets/PersonMarker.dart';
 import 'package:tree_bud/screens/widgets/SeparatedColumn.dart';
 import 'package:tree_bud/screens/widgets/TreeMarker.dart';
@@ -39,12 +41,26 @@ class _MapFunctionState extends State<MapFunction>
       user4: 'Task in progress',
     };
 
-    // Creating a new tree and adding it to the list
-    trees.add(Tree('3', 'Maple Tree', const LatLng(52.5200, 13.4050), user3,
-        newTaskHistory, caretakers));
-    trees.add(Tree('4', 'Apple Tree', const LatLng(52.2341, 13.2454), user4,
-        newTaskHistory, caretakers));
+    // Different LatLng for each tree
+    LatLng tree3LatLng = const LatLng(51.3775, 6.1725);
+    LatLng tree4LatLng = const LatLng(51.3690, 6.1678);
+    LatLng tree5LatLng = const LatLng(51.3682, 6.1761);
+    LatLng tree6LatLng = const LatLng(51.3717, 6.1700);
+    LatLng tree7LatLng = const LatLng(51.3752, 6.1740);
+    LatLng tree8LatLng = const LatLng(51.3668, 6.1675);
+    LatLng tree9LatLng = const LatLng(51.3676, 6.1769);
+    LatLng tree10LatLng = const LatLng(51.3729, 6.1893);
+
+    trees.add(Tree('3', 'Maple Tree', tree3LatLng, user3, newTaskHistory, caretakers));
+    trees.add(Tree('4', 'Apple Tree', tree4LatLng, user4, newTaskHistory, caretakers));
+    trees.add(Tree('5', 'Oak Tree', tree5LatLng, user3, newTaskHistory, caretakers));
+    trees.add(Tree('6', 'Pine Tree', tree6LatLng, user4, newTaskHistory, caretakers));
+    trees.add(Tree('7', 'Cherry Tree', tree7LatLng, user3, newTaskHistory, caretakers));
+    trees.add(Tree('8', 'Birch Tree', tree8LatLng, user4, newTaskHistory, caretakers));
+    trees.add(Tree('9', 'Willow Tree', tree9LatLng, user3, newTaskHistory, caretakers));
+    trees.add(Tree('10', 'Fir Tree', tree10LatLng, user4, newTaskHistory, caretakers));
   }
+
 
   void _addMarkersForTrees() {
     for (var tree in trees) {
@@ -280,12 +296,11 @@ class _MapFunctionState extends State<MapFunction>
                   width: 200,
                   height: 55,
                   child: FilledButton(
-                    // tooltip: 'Go to plant your own tree',
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoadPage(),
+                          builder: (context) => const NewTreeStep1(),
                         ),
                       );
                     },

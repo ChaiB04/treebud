@@ -10,39 +10,38 @@ class InfoTree extends StatefulWidget {
 }
 
 class _InfoTreeState extends State<InfoTree> {
-
   final List<ProfileInfo> profileList = [
     const ProfileInfo(
       imageUrl:
-      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
+          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
       name: 'John Doe',
       task: 'Cleaned it',
       time: '1 hour ago',
     ),
     const ProfileInfo(
       imageUrl:
-      'https://images.unsplash.com/photo-1558072844-b2e8b546d415?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
+          'https://images.unsplash.com/photo-1558072844-b2e8b546d415?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
       name: 'Jane Smith',
       task: 'Fed it',
       time: '2 hours ago',
     ),
     const ProfileInfo(
       imageUrl:
-      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
+          'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTh8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
       name: 'Michael Johnson',
       task: 'Cleaned it',
       time: '4 hour ago',
     ),
     const ProfileInfo(
       imageUrl:
-      'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2FwbGluZ3xlbnwwfHwwfHx8Mg%3D%3D',
+          'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c2FwbGluZ3xlbnwwfHwwfHx8Mg%3D%3D',
       name: 'Sarah Brown',
       task: 'Fed it',
       time: '5 hours ago',
     ),
     const ProfileInfo(
       imageUrl:
-      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
+          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
       name: 'David Lee',
       task: 'Watered it',
       time: '6 hours ago',
@@ -54,16 +53,14 @@ class _InfoTreeState extends State<InfoTree> {
       0,
       ProfileInfo(
         imageUrl:
-        'https://images.unsplash.com/photo-1558072844-b2e8b546d415?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
+            'https://images.unsplash.com/photo-1558072844-b2e8b546d415?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D',
         name: 'Mary Jane',
         task: task,
         time: time,
       ),
     );
 
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -73,7 +70,7 @@ class _InfoTreeState extends State<InfoTree> {
         toolbarHeight: 40,
         backgroundColor: const Color.fromRGBO(41, 57, 33, 1.0),
         iconTheme:
-        const IconThemeData(color: Color.fromRGBO(245, 247, 248, 1.0)),
+            const IconThemeData(color: Color.fromRGBO(245, 247, 248, 1.0)),
         actions: const [
           CircleAvatar(
             radius: 25,
@@ -142,7 +139,7 @@ class _InfoTreeState extends State<InfoTree> {
                                     contentPadding: EdgeInsets.zero,
                                     content: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
                                           children: [
@@ -154,13 +151,13 @@ class _InfoTreeState extends State<InfoTree> {
                                                   topLeft: Radius.zero,
                                                   bottomLeft: Radius.zero,
                                                   bottomRight:
-                                                  Radius.circular(10.0),
+                                                      Radius.circular(10.0),
                                                   topRight:
-                                                  Radius.circular(10.0),
+                                                      Radius.circular(10.0),
                                                 ),
                                               ),
                                               padding:
-                                              const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.all(10.0),
                                               width: 108,
                                               child: const Text(
                                                 'Carbon Offset',
@@ -168,7 +165,7 @@ class _InfoTreeState extends State<InfoTree> {
                                                     color: Colors.white,
                                                     fontSize: 12.0,
                                                     fontWeight:
-                                                    FontWeight.bold),
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                             Container(
@@ -177,22 +174,22 @@ class _InfoTreeState extends State<InfoTree> {
                                                     151, 190, 97, 1.0),
                                                 borderRadius: BorderRadius.only(
                                                   topRight:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                   bottomLeft:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                   bottomRight:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                 ),
                                               ),
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               width: 100,
                                               height: 70,
                                               child: const Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 children: [
                                                   Text(
                                                     '2,340',
@@ -201,7 +198,7 @@ class _InfoTreeState extends State<InfoTree> {
                                                             41, 57, 33, 1.0),
                                                         fontSize: 18,
                                                         fontWeight:
-                                                        FontWeight.bold),
+                                                            FontWeight.bold),
                                                   ),
                                                   Text(
                                                     'Carbon(t)',
@@ -223,15 +220,15 @@ class _InfoTreeState extends State<InfoTree> {
                                                     41, 57, 33, 1.0),
                                                 borderRadius: BorderRadius.only(
                                                   topLeft:
-                                                  Radius.circular(10.0),
+                                                      Radius.circular(10.0),
                                                   bottomLeft:
-                                                  Radius.circular(10.0),
+                                                      Radius.circular(10.0),
                                                   bottomRight: Radius.zero,
                                                   topRight: Radius.zero,
                                                 ),
                                               ),
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               width: 108,
                                               child: const Text(
                                                 'Planted on',
@@ -240,7 +237,7 @@ class _InfoTreeState extends State<InfoTree> {
                                                     color: Colors.white,
                                                     fontSize: 14.0,
                                                     fontWeight:
-                                                    FontWeight.bold),
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                             Container(
@@ -249,22 +246,22 @@ class _InfoTreeState extends State<InfoTree> {
                                                     151, 190, 97, 1.0),
                                                 borderRadius: BorderRadius.only(
                                                   topLeft:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                   bottomLeft:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                   bottomRight:
-                                                  Radius.circular(30.0),
+                                                      Radius.circular(30.0),
                                                 ),
                                               ),
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               width: 100,
                                               height: 70,
                                               child: const Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 children: [
                                                   Text(
                                                     '2024',
@@ -273,7 +270,7 @@ class _InfoTreeState extends State<InfoTree> {
                                                             41, 57, 33, 1.0),
                                                         fontSize: 18,
                                                         fontWeight:
-                                                        FontWeight.bold),
+                                                            FontWeight.bold),
                                                   ),
                                                   Text(
                                                     '14th January',
@@ -298,8 +295,8 @@ class _InfoTreeState extends State<InfoTree> {
                                           },
                                           style: ButtonStyle(
                                             backgroundColor:
-                                            MaterialStateProperty.all<
-                                                Color>(
+                                                MaterialStateProperty.all<
+                                                    Color>(
                                               const Color.fromRGBO(
                                                   73, 97, 36, 1.0),
                                             ), // Change Colors.blue to your desired color
@@ -307,7 +304,7 @@ class _InfoTreeState extends State<InfoTree> {
                                                 OutlinedBorder>(
                                               RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(10.0),
+                                                    BorderRadius.circular(10.0),
                                               ),
                                             ),
                                           ),
@@ -346,7 +343,8 @@ class _InfoTreeState extends State<InfoTree> {
                         backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromRGBO(73, 97, 36, 1.0),
                         ),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -367,12 +365,13 @@ class _InfoTreeState extends State<InfoTree> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromRGBO(73, 97, 36, 1.0),
-                        ),shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ),
-
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                       ),
                       child: const Text(
                         'Feed it',
@@ -389,11 +388,13 @@ class _InfoTreeState extends State<InfoTree> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromRGBO(73, 97, 36, 1.0),
-                        ),shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                       ),
                       child: const Text(
                         'Water it',

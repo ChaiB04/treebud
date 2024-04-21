@@ -18,6 +18,7 @@ class TreeMarker extends AnimatedMarker {
           child: Icon(
             Icons.room,
             size: size,
+              color:  const Color.fromRGBO(41, 57, 33, 1.0),
           ),
         ),
       );
