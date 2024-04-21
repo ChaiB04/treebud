@@ -80,6 +80,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                                 width: 125,
                                 child: TextField(
                                   obscureText: false,
+                                  style: TextStyle(color: Color.fromRGBO(245, 247, 248, 1.0)),
                                   decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -93,6 +94,7 @@ class _NewTreeStep3State extends State<NewTreeStep3> {
                                     ),
 
                                   ),
+
                                 ),
                               ),
                               Padding(

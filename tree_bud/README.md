@@ -1,16 +1,24 @@
-# tree_bud
+# TreeBud
 
-A new Flutter project.
+Duo case 26: Plant a tree
 
-## Getting Started
+## Description
+The following files include the application for the Duo Case "Plant a tree". 
+An application which is centered around the topic of planting trees int he environment, tracking, sharing and encouraging this.
+You will need to allow the application to access the location on your device. Using the Maps or AR functionality you can find many
+ways to see the participations of the other users.
 
-This project is a starting point for a Flutter application.
+## Language & Framework
+The application is made in Flutter (dart).
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
+Be sure to install an android emulator in order to run the application in Flutter, Dart. Or use your own mobile device (recommended in order to use the location).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Support
+For any questions, you can contact o.brabers@student.fontys.nl or c.bahari@student.fontys.nl .
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Project status
+The application project is still ongoing. The current time we've spent on it is 6 weeks.
+
+## License
+MIT
